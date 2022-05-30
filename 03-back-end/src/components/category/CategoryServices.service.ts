@@ -1,9 +1,9 @@
 import CategoryModel from './CategoryModel.model';
-import * as mysql2 from 'mysql2/promise';
 import IAdapterOptions from '../../common/IAdapterOptions.interface';
 import ItemService from '../item/ItemService.service';
 import IAddCategory from './dto/IAddCategory.dto';
 import BaseService from '../../common/BaseService';
+import IEditCategory from './dto/IEditCategory.dto';
 
 interface ICategoryAdapterOptions extends IAdapterOptions {
     loadItems: boolean;
@@ -37,29 +37,16 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
 
 
     public async add(data: IAddCategory): Promise<CategoryModel> {
-        return new Promise<CategoryModel>((resolve, reject) => {
-            const sql: string = "INSERT `category` SET `name` = ?,`image_path` = ?;"; //treba dpdati measurment enum
-
-            this.databaseConnection.execute(sql, [data.name,data.imagePath]).then(async result => {
-                const info: any = result;
-
-                const newCategoryId = +info[0]?.insertId;
-
-                const newCategory: CategoryModel|null = await this.getById(newCategoryId, DefaultCategoryAdapterOptions);
-
-                if (newCategory == null) {
-                    return reject ({message: `Duplicate category name!`,});
-                }
-
-                resolve(newCategory);
-
-            })
-            .catch(error => {
-                reject(error);
-            });
-        });
+        return this.baseAdd(data, DefaultCategoryAdapterOptions);
     }
+
+    public async editById(categoryId: number, data:IEditCategory, options: ICategoryAdapterOptions = DefaultCategoryAdapterOptions): Promise<CategoryModel> {
+        return this.baseEditBy(categoryId, data, options);
+    }
+        
+    
 }
+
 
 export default CategoryService;
 export { DefaultCategoryAdapterOptions};

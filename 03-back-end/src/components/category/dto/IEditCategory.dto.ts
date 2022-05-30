@@ -3,7 +3,7 @@ import IServiceData from '../../../common/IServiceData.interface';
 
 const ajv = new Ajv();
 
-export default interface IAddCategory extends IServiceData {
+export default interface IEditCategory extends IServiceData {
     name:string;
     image_path:string;           /// treba videti sta raditi sa image pathom jer zbog dodavanja add metoda u base servicu postman vidi kao da je upit u imagePath
                                                                                                                             ///umesto image_path i nece da insertuje
@@ -11,8 +11,12 @@ export default interface IAddCategory extends IServiceData {
     /// ovde mozda bude trebalo dodati neke stvari
 }
 
+interface IEditCategoryDto {
+    name: string;
+    image_path: string;
+}
 
-const AddCategoryShema = {
+const EditCategoryShema = {
     type: "object",
     properties: {
         name: {
@@ -35,8 +39,8 @@ const AddCategoryShema = {
     additionalProperties: false,
 };
 
-const AddCategoryValidator = ajv.compile(AddCategoryShema);
+const EditCategoryValidator = ajv.compile(EditCategoryShema);
 
-export { AddCategoryValidator};
+export { EditCategoryValidator, IEditCategoryDto};
 
 
