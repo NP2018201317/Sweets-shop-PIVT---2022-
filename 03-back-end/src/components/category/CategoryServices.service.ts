@@ -44,7 +44,6 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
         return this.baseEditBy(categoryId, data, options);
     }
         
-    
 }
 
 
