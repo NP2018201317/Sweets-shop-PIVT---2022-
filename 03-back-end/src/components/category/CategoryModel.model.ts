@@ -4,7 +4,7 @@ class CategoryModel implements IModel {
     categoryId: number;
     name: string;
     imagePath: string;
-    isActive: number;
+    isActive: boolean;
     /*enum Measurment {
         GRAMAZA = "100g",
         KOMAD= "komad",

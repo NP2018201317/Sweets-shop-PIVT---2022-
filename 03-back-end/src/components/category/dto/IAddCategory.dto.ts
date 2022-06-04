@@ -5,12 +5,15 @@ const ajv = new Ajv();
 
 export default interface IAddCategory extends IServiceData {
     name:string;
-    image_path:string;           /// treba videti sta raditi sa image pathom jer zbog dodavanja add metoda u base servicu postman vidi kao da je upit u imagePath
-                                                                                                                            ///umesto image_path i nece da insertuje
+    image_path:string;           
 
     /// ovde mozda bude trebalo dodati neke stvari
 }
+export interface IAddCategoryDto {
+    name:string;
+    imagePath:string;
 
+}
 
 const AddCategoryShema = {
     type: "object",
@@ -21,7 +24,7 @@ const AddCategoryShema = {
             maxLength:128,
         },
 
-        image_path: {
+        imagePath: {
             type:"string",
             minLength:4,
             maxLength:50,
@@ -29,7 +32,7 @@ const AddCategoryShema = {
     },
     required: [
         "name",
-        "image_path"
+        "imagePath"
 
     ],
     additionalProperties: false,

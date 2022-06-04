@@ -7,6 +7,7 @@ import IEditCategory from './dto/IEditCategory.dto';
 
 interface ICategoryAdapterOptions extends IAdapterOptions {
     loadItems: boolean;
+    //ovde treba da dodam logiku za prikazivanje slike u odnosu na rolu
 }
 
 const DefaultCategoryAdapterOptions : ICategoryAdapterOptions = {
@@ -24,7 +25,7 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
         category.categoryId = +data?.category_id; 
         category.name = data.name;
         category.imagePath = data?.image_path;
-        category.isActive = +data.is_active;
+        category.isActive = +data.is_active === 1;
 
         if(options.loadItems){
             const itemService: ItemService = new ItemService(this.databaseConnection);
@@ -41,7 +42,7 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
     }
 
     public async editById(categoryId: number, data:IEditCategory, options: ICategoryAdapterOptions = DefaultCategoryAdapterOptions): Promise<CategoryModel> {
-        return this.baseEditBy(categoryId, data, options);
+        return this.baseEditById(categoryId, data, options);
     }
         
 }

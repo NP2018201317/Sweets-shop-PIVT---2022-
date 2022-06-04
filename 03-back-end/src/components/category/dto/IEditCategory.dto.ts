@@ -12,9 +12,11 @@ export default interface IEditCategory extends IServiceData {
 }
 
 interface IEditCategoryDto {
-    name: string;
-    image_path: string;
+    name:string;
+    imagePath:string;
+
 }
+
 
 const EditCategoryShema = {
     type: "object",
@@ -25,7 +27,7 @@ const EditCategoryShema = {
             maxLength:128,
         },
 
-        image_path: {
+        imagePath: {
             type:"string",
             minLength:4,
             maxLength:50,
@@ -33,7 +35,7 @@ const EditCategoryShema = {
     },
     required: [
         "name",
-        "image_path"
+        "imagePath"
 
     ],
     additionalProperties: false,

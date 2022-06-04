@@ -7,6 +7,9 @@ import * as morgan from "morgan";
 import CategoryRouter from './components/category/CategoryRouter.router';
 import IApplicationResources from './common/IApplicationResources.interface';
 import * as mysql2 from 'mysql2/promise';
+import CategoryService from './components/category/CategoryServices.service';
+import ItemService from './components/item/ItemService.service';
+import AdministratorService from './components/administrator/AdministratorService.service';
 
 async function main() {
     const config: IConfig = DevConfig;
@@ -17,19 +20,28 @@ fs.mkdirSync(config.logging.path, {
     recursive: true,
 });
 
-const applicationResources: IApplicationResources = {
-    databaseConnection: await mysql2.createConnection({
-        host: config.database.host,
-        port: config.database.port,
-        user: config.database.user,
-        password: config.database.password,
-        database: config.database.database,
-        charset: config.database.charset,
-        timezone: config.database.timezone,
- 
-    }),
+const db = await mysql2.createConnection({
+    host: config.database.host,
+    port: config.database.port,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.database,
+    charset: config.database.charset,
+    timezone: config.database.timezone,
 
-}
+})
+
+const applicationResources: IApplicationResources = {
+    databaseConnection: db,
+    services: {
+        category: new CategoryService(db),
+        item: new ItemService(db),
+        administrator: new AdministratorService(db),
+        // ...
+    }
+
+};
+
 const application: express.Application = express();
 
 application.use(morgan(config.logging.format, {

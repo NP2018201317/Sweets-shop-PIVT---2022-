@@ -4,7 +4,7 @@ export default class ItemModel implements IModel {
     name: string;
     imagePath: string;
     description: string;
-    isActive: number;
+    isActive: boolean;
     
     categoryId: number;
 }
