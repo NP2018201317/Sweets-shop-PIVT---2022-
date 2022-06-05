@@ -1,9 +1,7 @@
 import * as mysql2 from 'mysql2/promise';
 import IModel from './IModel.interface';
 import IAdapterOptions from './IAdapterOptions.interface';
-import { openSync } from 'fs';
 import IServiceData from './IServiceData.interface';
-import { rejects } from 'assert';
 
 export default abstract class BaseService <ReturnModel extends IModel, AdapterOptions extends IAdapterOptions> {
     private db: mysql2.Connection;
@@ -55,10 +53,10 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
         return new Promise<ReturnModel>(
 
         (resolve,reject) => {
-            const sql: string = `SELECT * FROM \`${tableName}\` WHERE is_active=1 AND ${tableName}_id = ?;`;
+            const sql: string = `SELECT * FROM \`${tableName}\` WHERE ${tableName}_id = ?;`;
             this.databaseConnection.execute(sql, [id]).then(async([rows]) => {
                 
-                if(rows == undefined){
+                if(rows === undefined){
                     resolve(null);
                 }
 
@@ -141,6 +139,11 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
         return new Promise((resolve, reject) => {
             
             const properties = Object.getOwnPropertyNames(data);
+
+            if (properties.length === 0) {
+                return reject ({ message: "There is nothing to change!"}) 
+            }
+
             const sqlPairs = properties.map(property => "`" + property + "`= ?").join(", ");
             const values = properties.map(property => data[property]);
             values.push(id); //WHERE tablename_id =?
@@ -157,7 +160,7 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
 
                 const item: ReturnModel|null = await this.getById(id, options);
 
-                if (item == null) {
+                if (item === null) {
                     return reject ({message: 'Could not find this item in the' + tableName + 'table!',});
                 }
 
