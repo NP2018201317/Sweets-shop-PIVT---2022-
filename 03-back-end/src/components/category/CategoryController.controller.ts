@@ -18,7 +18,7 @@ class CategoryController extends BaseController{
     async getById(req: Request, res: Response) {
         const id: number = +req.params?.id;
 
-        this.services.category.getById(id, {loadItems:true}).then(result => {
+        this.services.category.getById(id, {loadItems:false}).then(result => {
             if (result === null) {
                 return res.sendStatus(404);
             }

@@ -11,7 +11,7 @@ export interface IServices {
 
 export default interface IApplicationResources{
     databaseConnection: mysql2.Connection;
-    services: IServices;
+    services?: IServices;
 
 }
 

@@ -28,9 +28,12 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
         category.isActive = +data.is_active === 1;
 
         if(options.loadItems){
-            const itemService: ItemService = new ItemService(this.databaseConnection);
-
-            category.items = await itemService.getAllByCategoryId(category.categoryId, options);
+            
+            category.items = await this.services.item.getAllByCategoryId(category.categoryId, {
+                loadCategory: false,
+                loadIngredient: false,
+            }
+            );
         }
         return category;
     

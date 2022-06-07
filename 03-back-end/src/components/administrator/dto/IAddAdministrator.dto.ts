@@ -22,7 +22,7 @@ const AddAdministratorShema = {
         },
         password: {
             type:"string",
-            pattern: "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z]).{6,}$",
+            pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
         }
     },
     required: [

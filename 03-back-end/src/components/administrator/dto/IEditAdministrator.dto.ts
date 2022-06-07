@@ -4,11 +4,13 @@ import IServiceData from '../../../common/IServiceData.interface';
 const ajv = new Ajv();
 
 export default interface IEditAdministrator extends IServiceData {
-    password_hash: string;
+    password_hash?: string;
+    is_active?: number;
 }
 
 export interface IEditAdministratorDto {
-    password: string;
+    password?: string;
+    isActive?: boolean;
 }
 
 const EditAdministratorShema = {
@@ -17,11 +19,13 @@ const EditAdministratorShema = {
 
         password: {
             type:"string",
-            pattern: "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z]).{6,}$",
+            pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
+        },
+        isActive: {
+            type: "boolean",
         }
     },
     required: [
-            "password",
 
     ],
     additionalProperties: false,

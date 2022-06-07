@@ -2,16 +2,24 @@ import * as mysql2 from 'mysql2/promise';
 import IModel from './IModel.interface';
 import IAdapterOptions from './IAdapterOptions.interface';
 import IServiceData from './IServiceData.interface';
+import { IServices } from './IApplicationResources.interface';
+import IApplicationResources from './IApplicationResources.interface';
 
 export default abstract class BaseService <ReturnModel extends IModel, AdapterOptions extends IAdapterOptions> {
     private db: mysql2.Connection;
+    private serviceInstances: IServices;
 
-    constructor(databaseConnection: mysql2.Connection){
-        this.db = databaseConnection;
+    constructor(resources: IApplicationResources){
+        this.db = resources.databaseConnection;
+        this.serviceInstances = resources.services;
     }
 
     protected get databaseConnection(): mysql2.Connection{
         return this.db;
+    }
+
+    protected get services(): IServices {
+        return this.serviceInstances;
     }
 
     abstract tableName(): string;
@@ -82,7 +90,7 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
             const sql: string = `SELECT * FROM \`${tableName}\` WHERE is_active=1 AND \`${fieldName}\` = ?;`;
             this.databaseConnection.execute(sql, [value]).then(async([rows]) => {
                     
-                if(rows == undefined){
+                if(rows === undefined){
                     resolve([]);
                 }
 
@@ -102,6 +110,32 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
         })
     }
 
+    protected async getAllFromTableByFieldNameAndValue<OwnReturnType>( tableName: string, fieldName: string, value: any): Promise<OwnReturnType[]>{
+        return new Promise((resolve, reject) =>{
+            const sql = `SELECT * FROM \`${tableName}\` WHERE is_active=1 AND \`${fieldName}\` = ?;`;
+            this.databaseConnection.execute(sql, [value]).then(async([rows]) => {
+                    
+                if(rows === undefined){
+                    resolve([]);
+                }
+
+                const items: OwnReturnType[] = [];
+                
+                for (const row of rows as mysql2.RowDataPacket[]) {
+                    items.push(row as OwnReturnType);
+
+                }
+                resolve(items);
+
+            }).catch(error =>{
+
+                reject(error);
+                
+            });
+        })
+        
+    }
+    
     protected async baseAdd(data: IServiceData, options:AdapterOptions): Promise<ReturnModel>{
             const tableName = this.tableName();
         
