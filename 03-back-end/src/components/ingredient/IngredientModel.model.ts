@@ -7,6 +7,6 @@ export interface IItemIgredient {
 }
 
 export default class IngredientModel implements IModel {
-    priceId: number;
     name: string;
+    ingredientId: number;
 }

@@ -11,5 +11,5 @@ export default class ItemModel implements IModel {
     
     categoryId: number;
     category?: CategoryModel;
-    ingredient?: IngredientModel [] = []; /// videcemo za price
+    ingredients?: IngredientModel [] = []; /// videcemo za price
 }

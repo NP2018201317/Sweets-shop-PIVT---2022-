@@ -10,6 +10,7 @@ import * as mysql2 from 'mysql2/promise';
 import CategoryService from './components/category/CategoryServices.service';
 import ItemService from './components/item/ItemService.service';
 import AdministratorService from './components/administrator/AdministratorService.service';
+import IngredientService from "./components/ingredient/IngredientService.service";
 
 async function main() {
     const config: IConfig = DevConfig;
@@ -33,15 +34,20 @@ const db = await mysql2.createConnection({
 
 const applicationResources: IApplicationResources = {
     databaseConnection: db,
+    services: {
+        category: null,
+        ingredient: null,
+        administrator: null,
+        item: null,
+    }
     
 };
 
-applicationResources.services =  {
-    category: new CategoryService(applicationResources),
-    item: new ItemService(applicationResources),
-    administrator: new AdministratorService(applicationResources),
-    // ...
-}
+applicationResources.services.category =  new CategoryService(applicationResources);
+applicationResources.services.item =  new ItemService(applicationResources);
+applicationResources.services.administrator =  new AdministratorService(applicationResources);
+applicationResources.services.ingredient =  new IngredientService(applicationResources);
+
 
 const application: express.Application = express();
 

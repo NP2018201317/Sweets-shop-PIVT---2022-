@@ -100,6 +100,8 @@ async deleteCategory(req: Request, res: Response) {
 
 }
 
+    
+
 }
 
 export default CategoryController;
