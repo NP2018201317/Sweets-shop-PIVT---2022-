@@ -4,18 +4,19 @@ import IServiceData from '../../../common/IServiceData.interface';
 
 const ajv = new Ajv();
 
-export default interface IAddItem extends IServiceData {
+export default interface IEditItem extends IServiceData {
     name:string;
     description: string;
-    category_id: number;        
+    is_active:number;        
     image_path: string;
 
     /// ovde mozda bude trebalo dodati neke stvari
 }
-export interface IAddItemDto {
+export interface IEditItemDto {
     name:string;
     description:string;
     imagePath:string;
+    isActive:boolean;
     ingredientIds: number[]; // trebamo dodati i cenu
    
 
@@ -27,7 +28,7 @@ export interface IItemIgredient extends IServiceData {
 }
 
 
-const AddItemShema = {
+const EditItemShema = {
     type: "object",
     properties: {
         name: {
@@ -40,10 +41,13 @@ const AddItemShema = {
             minLength: 32,
             maxLength: 500,
         },
-        image_path: {
+        imagePath: {
             type: "string",
             minLength: 4,
             maxLength: 255
+        },
+        isActive: {
+            type:"boolean",
         },
         ingredientIds: {
             type: "array",
@@ -66,6 +70,6 @@ const AddItemShema = {
     additionalProperties: false,
 };
 
-const AddItemValidator = ajv.compile(AddItemShema);
+const EditItemValidator = ajv.compile(EditItemShema);
 
-export { AddItemValidator};
+export { EditItemValidator};

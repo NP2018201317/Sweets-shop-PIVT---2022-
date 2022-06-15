@@ -32,6 +32,7 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
             category.items = await this.services.item.getAllByCategoryId(category.categoryId, {
                 loadCategory: false,
                 loadIngredient: false,
+                hideInactiveCategories: false
             }
             );
         }

@@ -6,15 +6,18 @@ import IAddItem from './dto/IAddItem.dto';
 import { IItemIgredient } from './dto/IAddItem.dto';
 import { resolve } from 'path';
 import { rejects } from 'assert';
+import IEditItem from './dto/IEditItem.dto';
 
 export interface IItemAdapterOptions extends IAdapterOptions {
     loadCategory: boolean,
-    loadIngredient: boolean
+    loadIngredient: boolean,
+    hideInactiveCategories: boolean
 }
 
 export class DefaultItemAdapterOptions implements IItemAdapterOptions {
     loadCategory: false;
     loadIngredient: false;
+    hideInactiveCategories: true;
 
 }
 class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
@@ -45,7 +48,8 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
 
             item.ingredients = await this.services.ingredient.getAllByItemId(item.itemId, {});
         }
-
+        
+        /// treba dodati hideInactive
         
         resolve (item);
     })
@@ -62,7 +66,12 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
         return this.baseAdd(data, {
             loadCategory: false,
             loadIngredient: false,
+            hideInactiveCategories:true
         });
+    }
+
+    async edit(itemId: number, data: IEditItem, options: IItemAdapterOptions): Promise<ItemModel> {
+        return this.baseEditById(itemId, data, options);
     }
 
     async addItemIngredient(data: IItemIgredient): Promise<number> {
@@ -86,6 +95,29 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
         })
     
 }
+
+async deleteItemIngredient(data: IItemIgredient): Promise<number> {
+    return new Promise((resolve, reject) => {
+      
+        const sql: string = "DELETE FROM item_ingredient WHERE item_id = ? AND ingredient_id = ?;";
+
+    this.databaseConnection.execute(sql, [ data.item_id, data.ingredient_id ]).then(async result => {
+        const info: any = result;
+
+        const newItemIngredientId = +info[0]?.affectedRows;
+
+        resolve(newItemIngredientId);
+
+    })
+    .catch(error => {
+        reject(error);
+    });
+   
+    
+    })
+
+}
+
 
 }
 
