@@ -23,7 +23,7 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
     }
 
     public startTransaction() {
-        this.db.beginTransaction();
+        return this.db.beginTransaction();
     }
 
     public comitChanges() {

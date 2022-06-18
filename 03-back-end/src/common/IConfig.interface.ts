@@ -1,4 +1,16 @@
 import IRouter from './IRouter.interface';
+
+export interface IMailConfiguraton {
+    
+        host: string,
+        port: number,
+        email: string,
+        password: string,
+        debug: boolean,
+    }
+
+
+
 interface IConfig{
     server: {
         port:number;
@@ -28,6 +40,11 @@ interface IConfig{
  
     }
     routers: IRouter[],
+
+    mail: IMailConfiguraton,
 }
+
+
+
 
 export default IConfig;
