@@ -58,7 +58,7 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
     
 
     public async getAllByCategoryId(categoryId: number, options: IItemAdapterOptions): Promise<ItemModel[]> {
-        return this.getAllByFieldNameAnValue('category_id', categoryId, options);
+        return this.getAllByFieldNameAndValue('category_id', categoryId, options);
 
     }
 

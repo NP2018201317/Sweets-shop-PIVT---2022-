@@ -11,6 +11,7 @@ import CategoryService from './components/category/CategoryServices.service';
 import ItemService from './components/item/ItemService.service';
 import AdministratorService from './components/administrator/AdministratorService.service';
 import IngredientService from "./components/ingredient/IngredientService.service";
+import UserService from "./components/user/UserService.service";
 
 async function main() {
     const config: IConfig = DevConfig;
@@ -39,6 +40,7 @@ const applicationResources: IApplicationResources = {
         ingredient: null,
         administrator: null,
         item: null,
+        user: null
     }
     
 };
@@ -47,6 +49,7 @@ applicationResources.services.category =  new CategoryService(applicationResourc
 applicationResources.services.item =  new ItemService(applicationResources);
 applicationResources.services.administrator =  new AdministratorService(applicationResources);
 applicationResources.services.ingredient =  new IngredientService(applicationResources);
+applicationResources.services.user = new UserService(applicationResources);
 
 
 const application: express.Application = express();

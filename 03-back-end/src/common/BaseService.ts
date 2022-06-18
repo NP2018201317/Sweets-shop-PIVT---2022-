@@ -94,12 +94,12 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
         })
     }
 
-    protected async getAllByFieldNameAnValue(fieldName: string, value: any, options: AdapterOptions): Promise<ReturnModel[]> {
+    protected async getAllByFieldNameAndValue(fieldName: string, value: any, options: AdapterOptions): Promise<ReturnModel[]> {
         const tableName = this.tableName();
         return new Promise<ReturnModel[]>(
 
         (resolve,reject) => {
-            const sql: string = `SELECT * FROM \`${tableName}\` WHERE is_active=1 AND \`${fieldName}\` = ?;`;
+            const sql: string = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` = ?;`;
             this.databaseConnection.execute(sql, [value]).then(async([rows]) => {
                     
                 if(rows === undefined){

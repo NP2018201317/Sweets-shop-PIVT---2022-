@@ -1,6 +1,7 @@
 import IConfig from './common/IConfig.interface';
 import CategoryRouter from './components/category/CategoryRouter.router';
 import AdministratorRouter from './components/administrator/AdministratorRouter.router';
+import UserRouter from './components/user/UserRouter.router';
 
 const DevConfig: IConfig = {
     server: {
@@ -35,6 +36,7 @@ const DevConfig: IConfig = {
     routers: [
         new CategoryRouter(),
         new AdministratorRouter(),
+        new UserRouter(),
     ]
 };
 
