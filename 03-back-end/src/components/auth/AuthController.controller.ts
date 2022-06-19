@@ -7,6 +7,7 @@ import ITokenData from './dto/ITokenData';
 import { token } from 'morgan';
 import { DevConfig } from '../../configs';
 import { request } from 'http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 
 
 export default class AuthController extends BaseController{
@@ -69,7 +70,7 @@ export default class AuthController extends BaseController{
         const refreshTokenHeader: string = req.headers?.authorization ?? "";
 
     try {    
-        const tokenData = this.validateTokenAs(refreshTokenHeader, "administrator", "refresh");
+        const tokenData = AuthMiddleware.validateTokenAs(refreshTokenHeader, "administrator", "refresh");
         
         const authToken = jwt.sign(tokenData, DevConfig.auth.administrator.tokens.auth.keys.private, {
             algorithm: DevConfig.auth.administrator.algorithm,
@@ -88,71 +89,5 @@ export default class AuthController extends BaseController{
     }    
     } 
     
-    private validateTokenAs(tokenString: string, role: "user" | "administrator", type: "auth" | "refresh"): ITokenData {
-        
-        if (tokenString === "") {
-            throw {
-                status: 400,
-                message: "No token specified!",
-            }
-        }
-
-        const [ tokenType, token ] = tokenString.trim().split(" ");
-
-        if ( tokenType !== "Bearer") {
-            throw {
-                status: 400,
-                message: "Invalid token type!",
-            } 
-        }
-
-        if (typeof token !== "string" || token.length === 0) {
-            throw {
-                status: 400,
-                message: "Token not specified!",
-            }
-        }
-
-    try {    
-        const tokenVerification = jwt.verify(token, DevConfig.auth[role].tokens[type].keys.public);
-
-        if (!tokenVerification) {
-            throw {
-                status: 401,
-                message: "Invalid token specified!",
-            }
-        }
-
-        const originalTokenData = tokenVerification as ITokenData;
-        
-        const tokenData: ITokenData = {
-            role: originalTokenData.role,
-            id: originalTokenData.id,
-            identity: originalTokenData.identity,
-        }
-
-        if (tokenData.role !== role) {
-            throw {
-                status: 401,
-                message: "Invalid token role!",
-            }
-        }
-
-        return tokenData;
     
-    } catch (error) {
-        const message: string = (error?.message ?? "");
-        
-        if (message.includes("jwt expired")) {
-            throw {
-                status: 401,
-                message: "This token has expired!",
-            }
-        }
-        throw {
-            status: 500,
-            message: error?.message,
-        }
-    }    
-    }
 }
