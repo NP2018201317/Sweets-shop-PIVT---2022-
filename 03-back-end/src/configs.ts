@@ -3,6 +3,8 @@ import CategoryRouter from './components/category/CategoryRouter.router';
 import AdministratorRouter from './components/administrator/AdministratorRouter.router';
 import UserRouter from './components/user/UserRouter.router';
 import { MailConfigurationParameters } from './config.mail';
+import AuthRouter from './components/auth/AuthRouter.router';
+import { readFileSync } from "fs"
 
 const DevConfig: IConfig = {
     server: {
@@ -38,6 +40,7 @@ const DevConfig: IConfig = {
         new CategoryRouter(),
         new AdministratorRouter(),
         new UserRouter(),
+        new AuthRouter(),
     ],
 
     mail: {
@@ -46,7 +49,52 @@ const DevConfig: IConfig = {
         email: "",
         password: "",
         debug: true,
-    }
+    },
+    auth: {
+        administrator:{
+            algorithm: "RS256",
+            issuer: "PIiVT",
+            tokens: {
+                auth:{
+                    duration: 60 * 60 * 24,
+                    keys: {
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                    }
+            },
+            refresh:{
+
+                duration: 60 * 60 * 24 * 60,
+                    keys: {
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                    }
+            }
+        },
+
+    },
+        user: {
+            algorithm: "RS256",
+            issuer: "PIiVT",
+            tokens: {
+                auth:{
+                    duration: 60 * 60 * 24,
+                    keys: {
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                    }
+            },
+            refresh:{
+
+                duration: 60 * 60 * 24 * 60,
+                    keys: {
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                    }
+            }
+        },
+        },
+    },
 };
 
 DevConfig.mail = MailConfigurationParameters;

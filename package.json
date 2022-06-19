@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "ajv-formats": "^2.1.1"
+    "ajv-formats": "^2.1.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
