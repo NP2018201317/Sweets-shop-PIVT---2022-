@@ -124,7 +124,7 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
 
     protected async getAllFromTableByFieldNameAndValue<OwnReturnType>( tableName: string, fieldName: string, value: any): Promise<OwnReturnType[]>{
         return new Promise((resolve, reject) =>{
-            const sql = `SELECT * FROM \`${tableName}\` WHERE is_active=1 AND \`${fieldName}\` = ?;`;
+            const sql = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` = ?;`;
             this.databaseConnection.execute(sql, [value]).then(async([rows]) => {
                     
                 if(rows === undefined){

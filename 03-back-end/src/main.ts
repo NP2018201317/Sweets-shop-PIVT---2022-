@@ -12,6 +12,8 @@ import ItemService from './components/item/ItemService.service';
 import AdministratorService from './components/administrator/AdministratorService.service';
 import IngredientService from "./components/ingredient/IngredientService.service";
 import UserService from "./components/user/UserService.service";
+import OrderService from './components/cart/OrderService.service';
+import CartService from './components/cart/CartService.service';
 
 async function main() {
     const config: IConfig = DevConfig;
@@ -40,7 +42,9 @@ const applicationResources: IApplicationResources = {
         ingredient: null,
         administrator: null,
         item: null,
-        user: null
+        user: null,
+        cart: null,
+        order:null
     }
     
 };
@@ -50,6 +54,8 @@ applicationResources.services.item =  new ItemService(applicationResources);
 applicationResources.services.administrator =  new AdministratorService(applicationResources);
 applicationResources.services.ingredient =  new IngredientService(applicationResources);
 applicationResources.services.user = new UserService(applicationResources);
+applicationResources.services.order = new OrderService(applicationResources);
+applicationResources.services.cart = new CartService(applicationResources);
 
 
 const application: express.Application = express();
