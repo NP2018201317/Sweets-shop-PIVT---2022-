@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import BaseController from '../../common/BaseController';
 import { AddToCartValidator, IAddToCartDto } from './dto/IAddToCart.dto';
 import { EditInCartValidator, IEditInCartDto } from './dto/IEditInCart.dto';
+import { IMakeOrderDto, MakeOrderValidator, IAddOrder } from './dto/IMakeOrder.dto';
 
 export default class CartController extends BaseController {
     
@@ -91,6 +92,36 @@ export default class CartController extends BaseController {
     }
 
     makeOrder(req: Request, res: Response) {
+        
+        this.services.cart.getUserCart(req.authorisation?.id).then(cart => {
+            
+            if(cart.items.length === 0){
+                throw{
+                    status: 400,
+                    message: "Your cart is empty"
+                }
+            }
+            
+            
+            const dbData: IAddOrder = {
+                cart_id: cart.cartId
+            }
 
+            return this.services.order.makeOrder(dbData)
+
+        })
+
+        .then(order => {
+            res.send(order);
+        })
+        .catch(error => {
+            res.status(error?.status ?? 500).send(error?.message);
+        })
+    }
+
+    public async getMyOrders(req: Request, res: Response) {
+        this.services.order.getAllByUserId(req.authorisation?.id).then(orders => {
+            res.send(orders);
+        })
     }
 }
