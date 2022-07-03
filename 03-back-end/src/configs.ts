@@ -96,6 +96,7 @@ const DevConfig: IConfig = {
             }
         },
         },
+        allowAllRoutesWithoutAuthTokens: true //za vreme razvoja ove aplikacije
     },
 };
 

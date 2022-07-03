@@ -12,6 +12,11 @@ export default class AuthMiddleware {
         }    
 
         private static verifyAuthToken(req: Request, res: Response, next: NextFunction, allowedRoles: ("user"|"administrator")[]) {
+            if (DevConfig.auth.allowAllRoutesWithoutAuthTokens){
+                return next();
+            }
+            
+            
             const tokenHeader: string = req.headers?.authorization ?? "";
 
             try{
