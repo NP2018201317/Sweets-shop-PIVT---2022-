@@ -5,11 +5,8 @@ class CategoryModel implements IModel {
     name: string;
     imagePath: string;
     isActive: boolean;
-    /*enum Measurment {
-        GRAMAZA = "100g",
-        KOMAD= "komad",
-        KUGLA = "kugla",
-      }  */ 
+    mesuarment: '100g' | 'komad' | 'kugla' ;
+       
 
     items? : ItemModel[];  
 
