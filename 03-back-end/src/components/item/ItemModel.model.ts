@@ -10,6 +10,6 @@ export default class ItemModel implements IModel {
     isActive: boolean;
     
     categoryId: number;
-    category?: CategoryModel;
+    //category?: CategoryModel = null;
     ingredients?: IngredientModel [] = []; /// videcemo za price
 }

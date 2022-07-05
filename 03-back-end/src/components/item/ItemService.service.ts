@@ -38,11 +38,11 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
         item.description = data.description;
         item.categoryId = +data.category_id;
 
-        if (options.loadCategory) {
-            item.category = await this.services.category.getById(item.categoryId, {
-                loadItems: true,
-            });
-        }
+      //  if (options.loadCategory) {
+      //      item.category = await this.services.category.getById(item.categoryId, {
+      //          loadItems: true,
+      //      });
+      //  }
 
         if (options.loadIngredient) {
 
@@ -57,7 +57,7 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
 
     
 
-    public async getAllByCategoryId(categoryId: number, options: IItemAdapterOptions): Promise<ItemModel[]> {
+    public async getAllByCategoryId(categoryId: number, options: IItemAdapterOptions) {
         return this.getAllByFieldNameAndValue('category_id', categoryId, options);
 
     }

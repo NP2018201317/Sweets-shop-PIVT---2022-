@@ -5,6 +5,7 @@ import { fdatasync } from "fs";
 import CategoryModel from '../category/CategoryModel.model';
 import ItemModel from './ItemModel.model';
 import { EditItemValidator, IEditItemDto } from './dto/IEditItem.dto';
+import { resolve } from 'path';
 
 
 export default class ItemController extends BaseController {
@@ -18,18 +19,20 @@ export default class ItemController extends BaseController {
 
             this.services.item.getAllByCategoryId(categoryId,{
             loadCategory:false,
-            loadIngredient:false,
+            loadIngredient:true,
             hideInactiveCategories:true
                 
-            });
-        })
+            })
+        
         .then(result => {
             res.send(result);
         })
         .catch(error => {
             res.status(500).send(error?.message);
 
-        })    
+        })  
+        
+    })
 
         .catch(error => {
             res.status(500).send(error?.message);
