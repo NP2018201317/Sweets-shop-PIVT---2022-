@@ -9,6 +9,7 @@ export default interface IAddItem extends IServiceData {
     description: string;
     category_id: number;        
     image_path: string;
+    price:number;
 
     /// ovde mozda bude trebalo dodati neke stvari
 }
@@ -17,6 +18,8 @@ export interface IAddItemDto {
     description:string;
     imagePath:string;
     ingredientIds: number[]; // trebamo dodati i cenu
+    price:number;
+
    
 
 }
@@ -52,6 +55,10 @@ const AddItemShema = {
             items: 
                 {type: "integer"}
             
+        },
+        price: {
+            type: "number",
+            multipleOf: 0.01,
         }
 
     },
@@ -59,11 +66,13 @@ const AddItemShema = {
         "name",
         "description",
         "imagePath",
-        "ingredientIds"
+        "ingredientIds",
+        "price"
        
 
     ],
     additionalProperties: false,
+    
 };
 
 const AddItemValidator = ajv.compile(AddItemShema);

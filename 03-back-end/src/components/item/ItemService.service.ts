@@ -37,6 +37,7 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
         item.isActive = +data.is_active === 1;
         item.description = data.description;
         item.categoryId = +data.category_id;
+        item.price = data.price;
 
       //  if (options.loadCategory) {
       //      item.category = await this.services.category.getById(item.categoryId, {

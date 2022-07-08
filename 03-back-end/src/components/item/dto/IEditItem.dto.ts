@@ -9,6 +9,7 @@ export default interface IEditItem extends IServiceData {
     description: string;
     is_active:number;        
     image_path: string;
+    price:number;
 
     /// ovde mozda bude trebalo dodati neke stvari
 }
@@ -18,6 +19,7 @@ export interface IEditItemDto {
     imagePath:string;
     isActive:boolean;
     ingredientIds: number[]; // trebamo dodati i cenu
+    price: number;
    
 
 }
@@ -56,6 +58,10 @@ const EditItemShema = {
             items: 
                 {type: "integer"}
             
+        },
+        price: {
+            type:"number",
+            multipleOf: 0.01
         }
 
     },
@@ -63,7 +69,8 @@ const EditItemShema = {
         "name",
         "description",
         "imagePath",
-        "ingredientIds"
+        "ingredientIds",
+        "price"
        
 
     ],

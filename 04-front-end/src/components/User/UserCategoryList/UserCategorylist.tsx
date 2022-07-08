@@ -1,5 +1,6 @@
 import ICategory from '../../../models/ICategory.model';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function UserCategoryList() {
     const [categories, setCategories] = useState<ICategory[]>([]);
@@ -23,8 +24,9 @@ export default function UserCategoryList() {
         <ul>
             {categories.map(category => (
                 <li key= {"category-" + category.categoryId }>
-                    {category.name}
+                    <Link to={"/category/" + category.categoryId}> {category.name}</Link>
                 </li>
+
             ))}
         
         </ul>

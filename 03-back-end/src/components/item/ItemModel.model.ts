@@ -8,7 +8,8 @@ export default class ItemModel implements IModel {
     imagePath: string;
     description: string;
     isActive: boolean;
-    
+    price:number;
+
     categoryId: number;
     //category?: CategoryModel = null;
     ingredients?: IngredientModel [] = []; /// videcemo za price

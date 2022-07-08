@@ -63,7 +63,8 @@ export default class ItemController extends BaseController {
                 name: data.name,
                 category_id: categoryId,
                 description: data.description,
-                image_path: data.imagePath
+                image_path: data.imagePath,
+                price: data.price
             })
             .then(newItem => {
                 for (let givenIngredientIds of data.ingredientIds) {
@@ -179,6 +180,7 @@ export default class ItemController extends BaseController {
                 description: data.description,
                 image_path: data.imagePath,
                 is_active: data.isActive ? 1 : 0,
+                price: data.price
 
            }, {
 
