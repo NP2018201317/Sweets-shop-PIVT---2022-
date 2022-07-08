@@ -6,6 +6,7 @@ import { MailConfigurationParameters } from './config.mail';
 import AuthRouter from './components/auth/AuthRouter.router';
 import { readFileSync } from "fs"
 import CartRouter from './components/cart/CartRouter.router';
+import ItemRouter from './components/item/ItemRouter.router';
 
 const DevConfig: IConfig = {
     server: {
@@ -42,7 +43,8 @@ const DevConfig: IConfig = {
         new AdministratorRouter(),
         new UserRouter(),
         new AuthRouter(),
-        new CartRouter()
+        new CartRouter(),
+        new ItemRouter()
     ],
 
     mail: {

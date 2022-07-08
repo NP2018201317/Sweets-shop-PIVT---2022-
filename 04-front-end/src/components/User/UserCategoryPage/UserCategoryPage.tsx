@@ -40,21 +40,23 @@ export default function UserCategoryPage() {
         })
 
 
-    }, [])
+    }, [params.id])
 
     return (
         <div>
             { loading && <p>Loading...</p>} 
-            { errorMessage && <p>Error: {errorMessage}</p>};
+            { errorMessage && <p>Error: {errorMessage}</p>}
             
             {category && (
             <div>
                     <h1>{ category?.name}</h1>
 
                     { items && (
-                        <div> 
+                        <div className="container"> 
+                            <div className="row">
                             { items.map(item => <ItemPreview key={ "item-" + item.itemId } item={ item }/>)}
-                        </div>  
+                            </div>  
+                        </div>
                     )}
 
                 </div>

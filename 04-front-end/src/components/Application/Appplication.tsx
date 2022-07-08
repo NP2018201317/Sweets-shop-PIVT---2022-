@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Menu from '../Menu/Menu';
 import UserCategoryList from '../User/UserCategoryList/UserCategorylist';
 import UserCategoryPage from '../User/UserCategoryPage/UserCategoryPage';
+import UserHomePage from '../User/UserHomePage/UserHomePage';
 
 function Application() {
   return (
@@ -14,7 +15,7 @@ function Application() {
     <BrowserRouter>
     <Menu />
       <Routes>
-       <Route path='/' element={ <div></div>} />
+       <Route path='/' element={ <UserHomePage/>} />
        <Route path='/auth/user/login' element={ <UserLoginPage /> } />
        <Route path='/categories' element={ <UserCategoryList /> } />
        <Route path='/category/:id' element={ <UserCategoryPage /> } />
