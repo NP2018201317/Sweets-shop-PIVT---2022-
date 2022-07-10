@@ -12,6 +12,7 @@ class ItemRouter implements IRouter {
     const itemController: ItemController = new ItemController(resources.services);
 
     application.get("/api/item", AuthMiddleware.getVerifier("administrator", "user"), itemController.getAll.bind(itemController));
+    application.get("/api/item/:id", AuthMiddleware.getVerifier("administrator", "user"), itemController.getById.bind(itemController));
 
     }
 

@@ -26,6 +26,22 @@ export default class ItemController extends BaseController {
         });
     }
 
+    async getById(req: Request, res: Response) {
+        const id: number = +req.params?.id;
+
+        this.services.item.getById(id, {loadCategory: false, loadIngredient: true, hideInactiveCategories: false}).then(result => {
+            if (result === null) {
+                return res.sendStatus(404);
+            }
+
+            res.send(result);
+        })
+
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
+    }
+
 
 
     async getAllItemsByCategoryId(req: Request, res: Response) {

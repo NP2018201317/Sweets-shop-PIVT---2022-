@@ -26,6 +26,7 @@ class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions
         category.name = data.name;
         category.imagePath = data?.image_path;
         category.isActive = +data.is_active === 1;
+        category.mesuarment = data.measurement;
 
         if(options.loadItems){
             

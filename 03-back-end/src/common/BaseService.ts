@@ -42,7 +42,7 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
         const tableName = this.tableName();
         return new Promise<ReturnModel[]>(
             (resolve,reject) => {
-                const sql: string = `SELECT * FROM \`${ tableName }\` WHERE is_active=1;`;
+                const sql: string = `SELECT * FROM \`${ tableName }\`;`;
                 this.databaseConnection.execute(sql).then(async([rows]) => {
                     
                     if(rows == undefined){
