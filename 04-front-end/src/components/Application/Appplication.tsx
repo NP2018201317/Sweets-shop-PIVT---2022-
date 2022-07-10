@@ -7,6 +7,10 @@ import Menu from '../Menu/Menu';
 import UserCategoryList from '../User/UserCategoryList/UserCategorylist';
 import UserCategoryPage from '../User/UserCategoryPage/UserCategoryPage';
 import UserHomePage from '../User/UserHomePage/UserHomePage';
+import AdminDashboard from '../Administrator/Dashboard/AdminDashboard';
+import AdminCategoryList from '../Administrator/Dashboard/AdminCategoryList';
+import UserItemDetailsPage from '../User/UserItemDetailsPage/UserItemDetailsPage';
+import AdminAdministratorList from '../Administrator/Dashboard/AdminAdministratorList';
 
 function Application() {
   return (
@@ -19,7 +23,12 @@ function Application() {
        <Route path='/auth/user/login' element={ <UserLoginPage /> } />
        <Route path='/categories' element={ <UserCategoryList /> } />
        <Route path='/category/:id' element={ <UserCategoryPage /> } />
+       <Route path='/item/:id' element={ <UserItemDetailsPage /> } />
 
+       <Route path='/admin/dashboard' element={ <AdminDashboard/> } />
+       <Route path='/admin/dashboard/category/list' element={ <AdminCategoryList/> } />
+
+       <Route path='/admin/dashboard/administrator/list' element={ <AdminAdministratorList/> } />
        
 
       </Routes>

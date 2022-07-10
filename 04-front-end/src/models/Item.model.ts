@@ -8,5 +8,5 @@ export default interface IItem {
     description: string;
     categoryId: number;
     price: number;
-    ingredient: IIngredient[];
+    ingredients: IIngredient[];
 }
