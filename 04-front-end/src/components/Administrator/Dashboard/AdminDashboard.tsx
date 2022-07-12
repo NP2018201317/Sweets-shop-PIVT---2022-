@@ -16,7 +16,7 @@ export default function AdminDashboard() {
             <div className="col-12 col-md-4 p-3 d-grid gap-3">
                     <h2>Administrators</h2>
                     <Link className="btn btn-primary" to="/admin/dashboard/administrator/list">List all administrator</Link>
-                    <Link className='btn btn-primary' to="/admin/dashboard/category/add">Add a new administrator</Link>
+                    <Link className='btn btn-primary' to="/admin/dashboard/administrator/add">Add a new administrator</Link>
                 </div>
             
             </div>
