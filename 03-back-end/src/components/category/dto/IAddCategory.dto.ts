@@ -5,13 +5,15 @@ const ajv = new Ajv();
 
 export default interface IAddCategory extends IServiceData {
     name:string;
-    image_path:string;           
+    image_path:string;
+    measurement: string;           
 
     /// ovde mozda bude trebalo dodati neke stvari
 }
 export interface IAddCategoryDto {
     name:string;
     imagePath:string;
+    measurement: string;
 
 }
 
@@ -29,6 +31,9 @@ const AddCategoryShema = {
             minLength:4,
             maxLength:50,
         },
+        measurement: {
+            type:"string",
+        }
     },
     required: [
         "name",

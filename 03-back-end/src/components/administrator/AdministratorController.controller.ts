@@ -10,7 +10,7 @@ export default class  AdministratorController extends BaseController {
     getAll(req: Request, res: Response) {
         this.services.administrator.getAll({
             removePassword: true
-        }
+        },
         ).then(result =>{
             res.send(result);
         })
@@ -88,6 +88,22 @@ export default class  AdministratorController extends BaseController {
         })
         .catch(error => {
             res.status(500).send(error?.message);
+        });
+    }
+
+    async getAllAdministratorsAdmin(req: Request, res: Response) {
+        if(req.authorisation?.role === "administrator"){
+            return res.send([
+                "test for " + req.authorisation?.identity  
+            ]);
+    
+        }
+    
+    
+        this.services.administrator.getAllAdministratorsForAdmin().then(result =>{
+            res.send(result);
+        }).catch(error => {
+            res.status(500).send((error)?.message);
         });
     }
 }

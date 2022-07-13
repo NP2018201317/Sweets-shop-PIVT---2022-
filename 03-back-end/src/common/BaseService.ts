@@ -35,14 +35,17 @@ export default abstract class BaseService <ReturnModel extends IModel, AdapterOp
     }
 
     abstract tableName(): string;
+    abstract sortFildName(): string;
 
     protected abstract adaptToModel(data: any, options: AdapterOptions): Promise<ReturnModel>;
 
     public getAll(options: AdapterOptions): Promise<ReturnModel[]> {
         const tableName = this.tableName();
+        const sortFildName = this.sortFildName();
         return new Promise<ReturnModel[]>(
             (resolve,reject) => {
-                const sql: string = `SELECT * FROM \`${ tableName }\`;`;
+               
+                const sql = `SELECT * FROM \`${ tableName }\` WHERE is_active = 1 ORDER BY \`${ sortFildName }\` asc;`;
                 this.databaseConnection.execute(sql).then(async([rows]) => {
                     
                     if(rows == undefined){

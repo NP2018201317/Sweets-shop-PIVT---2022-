@@ -16,6 +16,7 @@ export default function IItemDetailsPreview(props: IItemPreviewProperties){
                 <p><b>Ingredients:</b> { props.item.ingredients.map(ingredient => (
             <span>{ingredient.name}, </span>
             ))}</p>
+            <p><b>Measurement:</b> { props.item.category.measurement }</p>
                 <p><b>Price:</b> { props.item.price } RSD</p> <button className='btn btn-primary'>Add to cart</button>
             </div>
         </div>

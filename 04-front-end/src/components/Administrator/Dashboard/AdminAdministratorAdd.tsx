@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSave,} from '@fortawesome/free-regular-svg-icons';
 import { api } from '../../../api/api';
 import { useNavigate } from 'react-router-dom';
+import  './AdminAdministratorAdd';
 
 export default function AdminAdministratorAdd() {
 
@@ -27,9 +28,10 @@ export default function AdminAdministratorAdd() {
     
     
     return (
+        
         <div className="row">
             <div className="col-12 col-md-8 offset-md2 col-lg-6 offset-lg-3">
-                <div className="card">
+                <div className="card" style={{width: "500px"}}>
                     <div className="card-body">
                         <div className="card-tittle">
                             <h1 className="h5">Add new administrator</h1>

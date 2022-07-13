@@ -18,6 +18,9 @@ class IngredientService extends BaseService<IngredientModel, IngredientAdapterOp
     tableName(): string {
         return "ingredient";
     }
+    sortFildName(): string {
+        return "ingredient_id";
+    }
 
 
 protected async adaptToModel(data: any): Promise<IngredientModel>{

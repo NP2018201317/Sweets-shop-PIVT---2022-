@@ -12,6 +12,7 @@ import AdminCategoryList from '../Administrator/Dashboard/AdminCategoryList';
 import UserItemDetailsPage from '../User/UserItemDetailsPage/UserItemDetailsPage';
 import AdminAdministratorList from '../Administrator/Dashboard/AdminAdministratorList';
 import AdminAdministratorAdd from '../Administrator/Dashboard/AdminAdministratorAdd';
+import AdminCategoryAdd from '../Administrator/Dashboard/AdminCategoryAdd';
 
 function Application() {
   return (
@@ -31,6 +32,7 @@ function Application() {
 
        <Route path='/admin/dashboard/administrator/list' element={ <AdminAdministratorList/> } />
        <Route path='/admin/dashboard/administrator/add' element={ <AdminAdministratorAdd/> } />
+       <Route path='/admin/dashboard/category/add' element={ <AdminCategoryAdd/> } />
        
 
       </Routes>

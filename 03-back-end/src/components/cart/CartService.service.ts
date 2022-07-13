@@ -11,6 +11,9 @@ export default class CartService extends BaseService<CartModel, ICartAdapterOpti
     tableName(): string {
         return "cart";
     }
+    sortFildName(): string {
+        return "cart_id"
+    }
 
     protected adaptToModel(data: any, options: ICartAdapterOptions = {}): Promise<CartModel> {
         return new Promise(async resolve => {

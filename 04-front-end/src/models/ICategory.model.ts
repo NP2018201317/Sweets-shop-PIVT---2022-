@@ -3,5 +3,5 @@ export default interface ICategory {
     name: string;
     isActive: boolean;
     imagePath: string;
-    mesuarment: "100g" | "kugla" | "komad";
+    measurement: "100g" | "kugla" | "komad";
 }

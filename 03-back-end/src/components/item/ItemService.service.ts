@@ -24,6 +24,9 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
     tableName(): string {
         return "item";
     }
+    sortFildName(): string {
+        return "price"
+    }
 
     protected adaptToModel(data: any, options: IItemAdapterOptions): Promise<ItemModel> {
         return new Promise(async(resolve) =>{
@@ -39,11 +42,9 @@ class ItemService extends BaseService<ItemModel, IItemAdapterOptions>{
         item.categoryId = +data.category_id;
         item.price = data.price;
 
-      //  if (options.loadCategory) {
-      //      item.category = await this.services.category.getById(item.categoryId, {
-      //          loadItems: true,
-      //      });
-      //  }
+        if (options.loadCategory) {
+            item.category = await this.services.category.getById(item.categoryId, { loadItems: false});
+        }
 
         if (options.loadIngredient) {
 

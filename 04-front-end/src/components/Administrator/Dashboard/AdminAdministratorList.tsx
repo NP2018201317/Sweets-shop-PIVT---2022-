@@ -14,7 +14,7 @@ export default function AdminAdministratorList() {
     const [ errorMessage, setErrorMessage ] = useState<string>("");
 
     function loadAdministrators() {
-        api("get", "/api/administrator", "administrator")
+        api("get", "/api/administrators/admin", "administrator")
         .then(res => {
             if (res.status === 'error') {
                 return setErrorMessage(res.data + "");

@@ -23,6 +23,9 @@ export default class UserService extends BaseService<UserModel, UserAdapteroptio
     tableName(): string {
         return "user";
     }
+    sortFildName(): string {
+        return "user_id";
+    }
 
     protected async adaptToModel(data: any, options: UserAdapteroptions = DefaultUserAdapterOptions): Promise<UserModel | null> {
         const user= new UserModel();

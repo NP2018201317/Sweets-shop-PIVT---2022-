@@ -1,5 +1,6 @@
 
 import IIngredient from './IIngredient.model';
+import ICategory from './ICategory.model';
 export default interface IItem {
     itemId:number;
     name: string;
@@ -9,4 +10,5 @@ export default interface IItem {
     categoryId: number;
     price: number;
     ingredients: IIngredient[];
+    category: ICategory;
 }

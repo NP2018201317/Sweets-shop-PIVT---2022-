@@ -19,6 +19,7 @@ class CategoryRouter implements IRouter{
         application.get("/api/category/:cid/item", AuthMiddleware.getVerifier("administrator", "user"),itemController.getAllItemsByCategoryId.bind(itemController));
         application.post("/api/category/:cid/item", AuthMiddleware.getVerifier("administrator"),itemController.add.bind(categoryController));
         application.put("/api/category/:cid/item", AuthMiddleware.getVerifier("administrator"),itemController.edit.bind(itemController));
+        application.get("/api/categories/admin" ,categoryController.getAllCategoriesAdmin.bind(categoryController));
 
     }
 }

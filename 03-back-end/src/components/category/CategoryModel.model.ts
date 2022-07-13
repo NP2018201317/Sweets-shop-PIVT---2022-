@@ -5,7 +5,7 @@ class CategoryModel implements IModel {
     name: string;
     imagePath: string;
     isActive: boolean;
-    mesuarment: '100g' | 'komad' | 'kugla' ;
+    measurement: '100g' | 'komad' | 'kugla' ;
        
 
     items? : ItemModel[];  

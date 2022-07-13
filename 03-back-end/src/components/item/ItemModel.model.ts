@@ -1,6 +1,7 @@
 import IModel from '../../common/IModel.interface';
 import CategoryModel from '../category/CategoryModel.model';
 import IngredientModel from '../ingredient/IngredientModel.model';
+import ICategory from '../../../../04-front-end/src/models/ICategory.model';
  
 export default class ItemModel implements IModel {
     itemId: number;
@@ -9,6 +10,7 @@ export default class ItemModel implements IModel {
     description: string;
     isActive: boolean;
     price:number;
+    category: ICategory;
 
     categoryId: number;
     //category?: CategoryModel = null;

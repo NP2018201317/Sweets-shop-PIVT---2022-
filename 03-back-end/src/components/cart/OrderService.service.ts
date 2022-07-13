@@ -16,6 +16,9 @@ export default class OrderService extends BaseService<OrderModel, IOrderAdapterO
     tableName(): string {
         return "order";
     }
+    sortFildName(): string {
+        return "order_id"
+    }
     protected adaptToModel(data: any, options: IOrderAdapterOptions = DefaultOrderAdapterOptions): Promise<OrderModel> {
         return new Promise(async resolve => {
             const order = new OrderModel();

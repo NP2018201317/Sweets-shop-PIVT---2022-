@@ -4,6 +4,8 @@ import IAdapterOptions from '../../common/IAdapterOptions.interface';
 import IAddAdministrator from './dto/IAddAdministrator.dto';
 import { DefaultCategoryAdapterOptions } from '../category/CategoryServices.service';
 import IEditAdministrator from './dto/IEditAdministrator.dto';
+import IAdministrator from '../../../../04-front-end/src/models/IAdministrator.model';
+import * as mysql2 from 'mysql2/promise';
 
 export class AdministratorAdapteroptions implements IAdapterOptions {
 
@@ -19,6 +21,9 @@ export const DefaultAdministratorAdapterOptions: AdministratorAdapteroptions = {
 export default class AdministratorService extends BaseService<AdministratorModel, AdministratorAdapteroptions> {
     tableName(): string {
         return "administrator";
+    }
+    sortFildName(): string {
+        return "administrator_id";
     }
 
     protected async adaptToModel(data: any, options: AdministratorAdapteroptions = DefaultAdministratorAdapterOptions): Promise<AdministratorModel> {
@@ -65,6 +70,31 @@ export default class AdministratorService extends BaseService<AdministratorModel
 
         })
     })
+}
+
+public async getAllAdministratorsForAdmin(): Promise<AdministratorModel[]> {
+    return new Promise((resolve, reject) => {
+      
+        const sql: string = "SELECT * FROM administrator";
+
+    this.databaseConnection.execute(sql).then(async ([rows]) => {
+
+        const items: AdministratorModel[] = [];
+                
+                for (const row of rows as mysql2.RowDataPacket[]) {
+                    items.push(await this.adaptToModel(row));
+
+                }
+                resolve(items);
+
+    })
+    .catch(error => {
+        reject(error);
+    });
+   
+    
+    })
+
 }
 }
 
