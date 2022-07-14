@@ -6,6 +6,9 @@ Broj indeksa: 2018201317
 Ime i prezime: Nikola Popovic
 Skolska godina: 2021/2022
 
+## Napomena
+Rute za kart i order ne rade jer je komentarisan deo koda za autorizaciju da se ne bi stalno morao refreshovao token kako bi se pozivale rute
+
 ## Projektni zahtev
 
 Aplikacija treba da omogući administratorima da dodaju nove vrste slatkiša u katalog radnje sa opisima i fotografijama. Samo prijavljeni korisnici, koji se na portal prijave sa ispravnih parametrima naloga administratora sadržaja mogu da pristupe administrativnom panelu portala. Ovde mogu da dodaju nove kategorije proizvoda i proizvode. Svaki proizvod (slatkiš) se sastoji od naslova, slike, detaljnog opisa slatkiša, kategorije kojoj pripada (torte, kolači itd), spiska sastojaka i cene po jedinici određenoj za tu kategoriju (masa ili komad, zavisno od kategorije). Proizvodi treba da pripadaju jednoj kategoriji (torte, kolači, hladni slatkiši itd). Kategorije korisnik može kroz panel da dodaje i menja, ali ne može da ih briše, već može da ih sakrije. Kada je kategorija sakrivena, sakriveni su svi slatkiši koji joj pripadaju. Sa korisničke strane treba omogućiti prikaz svih slatkiša poređanih po ceni za svaku od kategorija. Kategorije prikazati u vidu menija na veb sajtu, gde svaka kategorija ima opis i sliku koja predstavlja generalizovani prikaz vrste proizvoda koje obuhvata. Kada korisnik otvori stranicu nekog proizvoda, treba da vidi sve detalje o njemu, kao što su naslov, slika, opis i cena i da dobije mogućnost da izvrši kupovinu, tj. naručivanje određenog slatkiša. Izabrani slatkiš treba čuvati u korpi proizvoda dokle god korisnik ne odabere opciju za kraj kupovine. Prilikom dodavanja u korpu, korisnik treba da unese eventualne napomene za konkretan slatkiš. Na kraju kupovine, prikazati korisniku listu proizvoda koje je dodao u korpu i ponuditi da neki proizvod obriše, da se vrati nazad na kupovinu ili da potvrdi kupovinu. Ako korisnik potvrdi kupovinu, uzeti podatke o korisniku, među kojima su ime, prezime, adresa stanovanja i adresa elektronske pošte. Poslati korisniku na adresu elektronske pošte koju je upisao u formularu prilikom narudžbine listing stavki koje je kupio. Grafički interfejs veb sajta treba da bude realizovan sa responsive dizajnom.
@@ -23,18 +26,8 @@ Tehnička ograničenja
 
 ## Baza podataka
 
-..
 
-## Use-Case dijagrami
-
-..
 
 ## Uloge korisnika
 
-**Administrator**
-
-....
-
-**Korisnik**
-
-.....
+Link za figmu u resources folderu

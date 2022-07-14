@@ -82,8 +82,6 @@ class CategoryController extends BaseController{
         
             if(data.imagePath !== undefined) {
                 serviceData.image_path = result.imagePath 
-            } else {
-                serviceData.image_path = data.imagePath
             }
     
             if (data.isActive !== undefined) {
